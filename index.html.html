@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qabul — O'quv Bo'limi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1a2a4a;
+  --crimson: #8b1a2a;
+  --gold: #c9a84c;
+  --light: #f5f3ef;
+  --white: #ffffff;
+  --gray: #6b7280;
+  --border: #ddd8d0;
+  --text: #1f1f1f;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--navy);
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--white);
+}
+.logo-icon {
+  width: 42px; height: 42px;
+  background: var(--crimson);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 700; color: var(--white);
+  flex-shrink: 0;
+}
+.logo-text { line-height: 1.2; }
+.logo-title { font-size: 14px; font-weight: 600; letter-spacing: .02em; }
+.logo-sub { font-size: 11px; color: rgba(255,255,255,.6); }
+
+nav { display: flex; gap: 4px; align-items: center; }
+nav a {
+  color: rgba(255,255,255,.85);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 3px;
+  transition: all .2s;
+  white-space: nowrap;
+}
+nav a:hover { background: rgba(255,255,255,.1); color: var(--white); }
+nav a.active {
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+  border-radius: 0;
+  padding-bottom: 6px;
+}
+.nav-apply {
+  background: var(--crimson) !important;
+  color: var(--white) !important;
+  border-radius: 3px !important;
+  margin-left: 8px;
+  padding: 8px 18px !important;
+}
+.nav-apply:hover { background: #a02030 !important; }
+
+/* ── HERO ── */
+.hero {
+  height: 420px;
+  background:
+    linear-gradient(to bottom, rgba(10,20,40,.45) 0%, rgba(10,20,40,.7) 100%),
+    linear-gradient(135deg, #1a3a6a 0%, #2d5a9e 40%, #1a2a4a 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 2rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(201,168,76,.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(139,26,42,.12) 0%, transparent 50%);
+}
+.hero-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 2rem;
+  position: relative;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -.01em;
+}
+
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  background: var(--crimson);
+  padding: 0 2rem;
+}
+.breadcrumb-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  gap: 8px;
+  font-size: 13px;
+}
+.breadcrumb a { color: rgba(255,255,255,.8); text-decoration: none; }
+.breadcrumb a:hover { color: var(--white); }
+.breadcrumb span { color: rgba(255,255,255,.5); }
+.breadcrumb strong { color: var(--white); }
+
+/* ── MAIN LAYOUT ── */
+.main-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 3rem;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+}
+
+/* ── SIDEBAR ── */
+.sidebar { position: sticky; top: 80px; align-self: start; }
+.sidebar-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 12px;
+}
+.sidebar nav { display: flex; flex-direction: column; gap: 0; }
+.sidebar nav a {
+  color: var(--navy);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--border);
+  transition: all .2s;
+  line-height: 1.3;
+}
+.sidebar nav a:hover {
+  border-left-color: var(--crimson);
+  color: var(--crimson);
+  background: rgba(139,26,42,.04);
+}
+.sidebar nav a.active {
+  border-left-color: var(--crimson);
+  color: var(--crimson);
+  font-weight: 600;
+}
+
+/* ── CONTENT ── */
+.content-header { margin-bottom: 2rem; }
+.content-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: .75rem;
+}
+.content-header p {
+  font-size: 17px;
+  color: #444;
+  line-height: 1.7;
+  max-width: 620px;
+}
+
+/* ── STATS ROW ── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+.stat {
+  background: var(--light);
+  padding: 1.5rem;
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--crimson);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-lbl { font-size: 13px; color: var(--gray); font-weight: 500; }
+
+/* ── STEPS ── */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--navy);
+  margin-bottom: 1.25rem;
+  padding-bottom: .75rem;
+  border-bottom: 2px solid var(--border);
+}
+.steps { display: flex; flex-direction: column; gap: 0; margin-bottom: 2.5rem; }
+.step {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700;
+  margin-top: 2px;
+}
+.step-body h4 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.step-body p { font-size: 14px; color: var(--gray); line-height: 1.5; }
+
+/* ── FAQ ── */
+.faqs { margin-bottom: 2.5rem; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--navy);
+  user-select: none;
+  gap: 12px;
+}
+.faq-q:hover { color: var(--crimson); }
+.faq-icon {
+  width: 22px; height: 22px; flex-shrink: 0;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: var(--crimson);
+  transition: transform .25s;
+}
+.faq-a {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease, padding .25s;
+}
+.faq-item.open .faq-a { max-height: 200px; padding-bottom: 1rem; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+/* ── FORM ── */
+.form-section {
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.form-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--navy);
+  margin-bottom: .5rem;
+}
+.form-section > p { font-size: 14px; color: var(--gray); margin-bottom: 1.5rem; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+label { font-size: 13px; font-weight: 600; color: var(--navy); }
+label .req { color: var(--crimson); margin-left: 2px; }
+input, select, textarea {
+  padding: 9px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  transition: border-color .2s;
+  outline: none;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--navy); }
+textarea { resize: vertical; min-height: 80px; }
+.form-err { font-size: 12px; color: var(--crimson); display: none; }
+
+.btn-submit {
+  margin-top: 1.5rem;
+  background: var(--crimson);
+  color: var(--white);
+  border: none;
+  padding: 12px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Source Sans 3', sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: .02em;
+  transition: all .2s;
+}
+.btn-submit:hover { background: #a02030; transform: translateY(-1px); }
+.btn-submit:disabled { opacity: .6; cursor: default; transform: none; }
+
+.success-msg {
+  display: none;
+  background: #f0faf4;
+  border: 1.5px solid #6bcf9a;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+  font-size: 15px;
+  color: #1a6b3c;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  color: rgba(255,255,255,.65);
+  padding: 2.5rem 2rem;
+  font-size: 13px;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+footer a { color: rgba(255,255,255,.7); text-decoration: none; }
+footer a:hover { color: var(--white); }
+
+/* ── SECTION SCROLL HIDE ── */
+.tab-section { display: none; }
+.tab-section.active { display: block; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 720px) {
+  .main-wrap { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .stats { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  nav a { font-size: 12px; padding: 8px 8px; }
+  .logo-sub { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">I</div>
+      <div class="logo-text">
+        <div class="logo-title">Institut nomi</div>
+        <div class="logo-sub">Qabul va o'quv bo'limi</div>
+      </div>
+    </a>
+    <nav>
+      <a href="#" onclick="showTab('home',this)">Bosh sahifa</a>
+      <a href="#" onclick="showTab('qabul',this)" class="active">Qabul</a>
+      <a href="#" onclick="showTab('mutaxassisliklar',this)">Mutaxassisliklar</a>
+      <a href="#" onclick="showTab('talaba',this)">Talaba hayoti</a>
+      <a href="#" onclick="showTab('ariza',this)" class="nav-apply">Ariza topshir</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h1 id="hero-title">Qabul</h1>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="#">Bosh sahifa</a>
+    <span>—</span>
+    <strong id="bc-title">Qabul</strong>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">Sahifada:</div>
+    <nav id="sidebar-nav">
+      <a href="#" onclick="showTab('qabul',this)" class="active">Qabul haqida</a>
+      <a href="#" onclick="showTab('qanday',this)">Qanday topshirish</a>
+      <a href="#" onclick="showTab('mutaxassisliklar',this)">Mutaxassisliklar</a>
+      <a href="#" onclick="showTab('talaba',this)">Talaba hayoti</a>
+      <a href="#" onclick="showTab('ariza',this)">Ariza shakli</a>
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <main>
+
+    <!-- TAB: QABUL -->
+    <div class="tab-section active" id="tab-qabul">
+      <div class="content-header">
+        <h2>Kelajak sizni kutmoqda</h2>
+        <p>Institutimizda bilim va tajribani birlashtirgan ta'lim muhitida o'z yo'lingizni topasiz. Har yili iqtidorli talabalar oilasiga qo'shiling.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">2 400+</div>
+          <div class="stat-lbl">Talabalar soni</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">18</div>
+          <div class="stat-lbl">Mutaxassisliklar</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">94%</div>
+          <div class="stat-lbl">Ishga joylashish</div>
+        </div>
+      </div>
+
+      <h3 class="section-title">Ko'p so'raladigan savollar</h3>
+      <div class="faqs">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Qabul uchun qanday hujjatlar kerak?
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">Pasport nusxasi, attestat yoki diplom, 3×4 rasm (2 ta), tibbiy ma'lumotnoma (086-shakl). DTM yo'llanmasi bo'lsa majburiy.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Ariza topshirish muddatlari qachon?
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">Qabul 1-iyuldan 25-avgustgacha davom etadi. Onlayn ariza butun yil qabul qilinadi, lekin hujjatlar avgust oxirigacha topshirilishi shart.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            To'lov-kontrakt asosida qabul bormi?
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">Ha, davlat granti bilan bir qatorda to'lov-kontrakt asosida ham qabul amalga oshiriladi. Kontrakt narxi mutaxassislikka qarab farqlanadi.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Yotoqxona imkoniyati bormi?
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">Boshqa viloyatlardan kelgan talabalar uchun yotoqxona mavjud. Joylar soni cheklangan, shuning uchun erta murojaat qilish tavsiya etiladi.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: QANDAY -->
+    <div class="tab-section" id="tab-qanday">
+      <div class="content-header">
+        <h2>Qanday topshirish kerak?</h2>
+        <p>Qabul jarayoni oddiy — quyidagi 4 qadamni bajaring va hujjatlaringizni tayyorlang.</p>
+      </div>
+      <h3 class="section-title">Qabul bosqichlari</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Onlayn ariza to'ldiring</h4>
+            <p>Ushbu saytdagi ariza shaklini to'ldiring va asosiy ma'lumotlaringizni kiriting. Bu bepul va 5 daqiqa vaqt oladi.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Hujjatlarni tayyorlang</h4>
+            <p>Pasport, attestat/diplom, rasm va tibbiy ma'lumotnomangizni tayyorlang. Asliyat va nusxalar kerak bo'ladi.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Qabul komissiyasiga keling</h4>
+            <p>Belgilangan sanada hujjatlar bilan qabul komissiyasiga tashrif buyuring. Manzil: [Institut manzili].</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Natijani kuting</h4>
+            <p>Qabul natijalari 5-10 ish kuni ichida telefon yoki email orqali xabar qilinadi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: MUTAXASSISLIKLAR -->
+    <div class="tab-section" id="tab-mutaxassisliklar">
+      <div class="content-header">
+        <h2>Mutaxassisliklar</h2>
+        <p>Institutimizda 18 ta mutaxassislik bo'yicha bakalavriat va magistratura ta'limi mavjud.</p>
+      </div>
+      <h3 class="section-title">Asosiy yo'nalishlar</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:var(--crimson)">①</div>
+          <div class="step-body">
+            <h4>Iqtisodiyot va boshqaruv</h4>
+            <p>Iqtisodiyot, menejment, moliya, buxgalteriya hisobi. Davlat granti va kontrakt mavjud.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--crimson)">②</div>
+          <div class="step-body">
+            <h4>Axborot texnologiyalari</h4>
+            <p>Dasturiy injiniring, sun'iy intellekt, kiberxavfsizlik, kompyuter muhandisligi.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--crimson)">③</div>
+          <div class="step-body">
+            <h4>Gumanitar fanlar</h4>
+            <p>Falsafa, tarix, filologiya, xorijiy tillar. Ilmiy tadqiqot imkoniyatlari keng.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--crimson)">④</div>
+          <div class="step-body">
+            <h4>Tabiiy fanlar</h4>
+            <p>Matematika, fizika, kimyo, biologiya. Laboratoriya va amaliyot bazalari mavjud.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: TALABA -->
+    <div class="tab-section" id="tab-talaba">
+      <div class="content-header">
+        <h2>Talaba hayoti</h2>
+        <p>Darsdan tashqarida ham faol bo'ling — klub, sport, tadbirlar va ko'proq imkoniyatlar.</p>
+      </div>
+      <h3 class="section-title">Imkoniyatlar</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">🎓</div>
+          <div class="step-body">
+            <h4>Ilmiy to'garaklar</h4>
+            <p>20 dan ortiq ilmiy to'garak va klub. Xalqaro olimpiada va konferensiyalarda ishtirok etish imkoniyati.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">⚽</div>
+          <div class="step-body">
+            <h4>Sport</h4>
+            <p>Futbol, basketbol, voleybol, shaxmat. Ichki turnirlar va viloyatlararo musobaqalar.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">🏠</div>
+          <div class="step-body">
+            <h4>Yotoqxona</h4>
+            <p>Qulay yotoqxona, oshxona va kutubxona. Wi-Fi va o'qish zallari 24/7 ochiq.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: ARIZA -->
+    <div class="tab-section" id="tab-ariza">
+      <div class="content-header">
+        <h2>Ariza topshirish</h2>
+        <p>Quyidagi shaklni to'ldiring. Qabul bo'limi siz bilan 2 ish kuni ichida bog'lanadi.</p>
+      </div>
+
+      <div class="form-section">
+        <h3>Qabul arizasi</h3>
+        <p>Barcha maydonlar to'ldirilishi shart. <span style="color:var(--crimson)">*</span> belgili maydonlar majburiy.</p>
+
+        <div class="form-grid" id="ariza-form">
+          <div class="form-group">
+            <label>Familiya <span class="req">*</span></label>
+            <input type="text" id="f-familiya" placeholder="Karimov">
+          </div>
+          <div class="form-group">
+            <label>Ism <span class="req">*</span></label>
+            <input type="text" id="f-ism" placeholder="Jasur">
+          </div>
+          <div class="form-group">
+            <label>Otasining ismi</label>
+            <input type="text" id="f-otasi" placeholder="Aliyevich">
+          </div>
+          <div class="form-group">
+            <label>Tug'ilgan sanasi <span class="req">*</span></label>
+            <input type="date" id="f-sana">
+          </div>
+          <div class="form-group">
+            <label>Telefon <span class="req">*</span></label>
+            <input type="tel" id="f-tel" placeholder="+998 90 000 00 00">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="f-email" placeholder="email@mail.com">
+          </div>
+          <div class="form-group full">
+            <label>Manzil (viloyat, shahar) <span class="req">*</span></label>
+            <input type="text" id="f-manzil" placeholder="Toshkent viloyati, Chirchiq shahri">
+          </div>
+          <div class="form-group full">
+            <label>Mutaxassislik <span class="req">*</span></label>
+            <select id="f-mutax">
+              <option value="">— Tanlang —</option>
+              <option>Iqtisodiyot</option>
+              <option>Menejment</option>
+              <option>Moliya</option>
+              <option>Buxgalteriya hisobi</option>
+              <option>Dasturiy injiniring</option>
+              <option>Sun'iy intellekt</option>
+              <option>Kiberxavfsizlik</option>
+              <option>Falsafa</option>
+              <option>Tarix</option>
+              <option>Filologiya</option>
+              <option>Xorijiy tillar</option>
+              <option>Matematika</option>
+              <option>Fizika</option>
+              <option>Kimyo</option>
+              <option>Biologiya</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Ta'lim shakli <span class="req">*</span></label>
+            <select id="f-talim">
+              <option value="">— Tanlang —</option>
+              <option>Davlat granti (kunduzgi)</option>
+              <option>To'lov-kontrakt (kunduzgi)</option>
+              <option>To'lov-kontrakt (sirtqi)</option>
+              <option>Magistratura</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Qo'shimcha ma'lumot</label>
+            <textarea id="f-izoh" placeholder="Olimpiada natijalari, yutuqlar, savol yoki izoh..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-err" id="form-err">❗ Iltimos, barcha majburiy maydonlarni to'ldiring.</div>
+        <button class="btn-submit" id="submit-btn" onclick="submitForm()">Ariza yuborish →</button>
+
+        <div class="success-msg" id="success-msg">
+          ✅ <strong>Arizangiz qabul qilindi!</strong> Qabul bo'limi 2 ish kuni ichida +998 XX XXX XX XX raqamingizga qo'ng'iroq qiladi. Rahmat!
+        </div>
+      </div>
+
+      <p style="font-size:13px;color:var(--gray)">
+        Savollar uchun: <strong>+998 XX XXX XX XX</strong> yoki <strong>qabul@institut.uz</strong><br>
+        Ish vaqti: Dushanba–Juma, 09:00–18:00
+      </p>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div style="color:rgba(255,255,255,.9);font-weight:600;margin-bottom:4px;">Institut nomi</div>
+      <div>Manzil: Toshkent viloyati, [shahar], [ko'cha]</div>
+      <div>Tel: +998 XX XXX XX XX</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="margin-bottom:4px;"><a href="#">Qabul qoidalari</a> · <a href="#">Litsenziya</a> · <a href="#">Aloqa</a></div>
+      <div>© 2025 Institut nomi. Barcha huquqlar himoyalangan.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── TAB SWITCHING ──
+const tabs = {
+  home:           { title: 'Bosh sahifa',      tab: 'qabul' },
+  qabul:          { title: 'Qabul',             tab: 'qabul' },
+  qanday:         { title: 'Qanday topshirish', tab: 'qanday' },
+  mutaxassisliklar:{ title: 'Mutaxassisliklar', tab: 'mutaxassisliklar' },
+  talaba:         { title: 'Talaba hayoti',     tab: 'talaba' },
+  ariza:          { title: 'Ariza shakli',      tab: 'ariza' },
+};
+
+function showTab(id, el) {
+  if (event) event.preventDefault();
+  const cfg = tabs[id];
+  if (!cfg) return;
+
+  // hide all
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('tab-' + cfg.tab).classList.add('active');
+
+  // update hero & breadcrumb
+  document.getElementById('hero-title').textContent = cfg.title;
+  document.getElementById('bc-title').textContent   = cfg.title;
+
+  // update top nav active
+  document.querySelectorAll('header nav a').forEach(a => a.classList.remove('active'));
+
+  // update sidebar active
+  document.querySelectorAll('#sidebar-nav a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('onclick')?.includes("'" + id + "'"));
+  });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── FAQ ──
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ── FORM SUBMIT ──
+function submitForm() {
+  const req = ['f-familiya','f-ism','f-sana','f-tel','f-manzil','f-mutax','f-talim'];
+  const errEl = document.getElementById('form-err');
+  const ok = req.every(id => document.getElementById(id).value.trim() !== '');
+  if (!ok) {
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Yuborilmoqda...';
+
+  // Formspree yoki EmailJS bilan ulash mumkin
+  // Hozircha demo ko'rinish:
+  setTimeout(() => {
+    btn.style.display = 'none';
+    document.getElementById('ariza-form').style.opacity = '.4';
+    document.getElementById('ariza-form').style.pointerEvents = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  }, 1200);
+}
+</script>
+</body>
+</html>
